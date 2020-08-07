@@ -11,12 +11,12 @@ test("form header renders", () => {
 test("form shows success message on submit with form details", async () => {
     render(<CheckoutForm />);
 
-    const firstNameInput = screen.getByText(/first name/i);
-    const lastNameInput = screen.getByText(/last name/i);
-    const addressInput = screen.getByText(/address/i);
-    const cityInput = screen.getByText(/city/i);
-    const stateInput = screen.getByText(/state/i);
-    const zipInput = screen.getByText(/zip/i);
+    const firstNameInput = screen.getByPlaceholderText(/first name/i);
+    const lastNameInput = screen.getByPlaceholderText(/last name/i);
+    const addressInput = screen.getByPlaceholderText(/address/i);
+    const cityInput = screen.getByPlaceholderText(/city/i);
+    const stateInput = screen.getByPlaceholderText(/state/i);
+    const zipInput = screen.getByPlaceholderText(/zip/i);
 
     fireEvent.change(firstNameInput, { target: { value: 'Mary' } } );
     fireEvent.change(lastNameInput, { target: { value: 'Poppins' } } );
@@ -29,8 +29,8 @@ test("form shows success message on submit with form details", async () => {
 
     fireEvent.click(checkoutButton);
 
-    const nameRender = await screen.findByTestId(/name/i);
+    const nameRender = await screen.findByTestId(/successMessage/i);
     expect(nameRender).toBeInTheDocument();
-    
-    expect(screen.getAllByText(/Mary/i)).toBeInTheDocument(); 
+
+    expect(screen.getByText(/Mary/i)).toBeInTheDocument(); 
 });
